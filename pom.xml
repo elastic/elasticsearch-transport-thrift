@@ -19,7 +19,8 @@
     </licenses>
     <scm>
         <connection>scm:git:git@github.com:elasticsearch/elasticsearch-transport-thrift.git</connection>
-        <developerConnection>scm:git:git@github.com:elasticsearch/elasticsearch-transport-thrift.git</developerConnection>
+        <developerConnection>scm:git:git@github.com:elasticsearch/elasticsearch-transport-thrift.git
+        </developerConnection>
         <url>http://github.com/elasticsearch/elasticsearch-transport-thrift</url>
     </scm>
 
@@ -123,6 +124,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
+                <version>2.1.2</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
