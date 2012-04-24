@@ -8,14 +8,14 @@ In order to install the plugin, simply run: `bin/plugin -install elasticsearch/e
     ----------------------------------------------
     | Thrift Plugin | Elasticsearch    | Thrift  |
     ----------------------------------------------
-    | master        | 0.19 -> master   | 0.6.1   |
+    | master        | 0.19 -> master   | 0.8.0   |
     ----------------------------------------------
     | 1.1.0         | 0.19 -> master   | 0.6.1   |
     ----------------------------------------------
     | 1.0.0         | 0.18             | 0.6.1   |
     ----------------------------------------------
 
-The plugin works with thrift version `0.6.1`, the definition can be found under the `elasticsearch.thrift` file.
+The thrift definition can be found under the `elasticsearch.thrift` file.
 
 The thrift [schema|https://github.com/elasticsearch/elasticsearch-transport-thrift/blob/master/elasticsearch.thrift] can be used to generate thrift clients.
 
