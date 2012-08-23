@@ -76,7 +76,7 @@ public class SimpleThriftTests {
         RestRequest request = new RestRequest(Method.POST, "/test/type1");
         request.setBody(ByteBuffer.wrap(XContentFactory.jsonBuilder().startObject()
                 .field("field", "value")
-                .endObject().copiedBytes()));
+                .endObject().bytes().copyBytesArray().array()));
         RestResponse response = client.execute(request);
         Map<String, Object> map = parseBody(response);
         assertThat(response.getStatus(), equalTo(Status.CREATED));

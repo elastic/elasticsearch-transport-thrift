@@ -19,8 +19,9 @@
 
 package org.elasticsearch.thrift;
 
-import org.elasticsearch.common.Bytes;
-import org.elasticsearch.common.Unicode;
+import org.elasticsearch.common.bytes.ByteBufferBytesReference;
+import org.elasticsearch.common.bytes.BytesArray;
+import org.elasticsearch.common.bytes.BytesReference;
 import org.elasticsearch.rest.support.AbstractRestRequest;
 import org.elasticsearch.rest.support.RestUtils;
 
@@ -90,35 +91,11 @@ public class ThriftRestRequest extends AbstractRestRequest implements org.elasti
     }
 
     @Override
-    public byte[] contentByteArray() {
+    public BytesReference content() {
         if (!request.isSetBody()) {
-            return Bytes.EMPTY_ARRAY;
+            return BytesArray.EMPTY;
         }
-        return request.bufferForBody().array();
-    }
-
-    @Override
-    public int contentByteArrayOffset() {
-        if (!request.isSetBody()) {
-            return 0;
-        }
-        return request.bufferForBody().arrayOffset() + request.bufferForBody().position();
-    }
-
-    @Override
-    public int contentLength() {
-        if (!request.isSetBody()) {
-            return 0;
-        }
-        return request.bufferForBody().remaining();
-    }
-
-    @Override
-    public String contentAsString() {
-        if (!request.isSetBody()) {
-            return "";
-        }
-        return Unicode.fromBytes(contentByteArray(), contentByteArrayOffset(), contentLength());
+        return new ByteBufferBytesReference(request.bufferForBody());
     }
 
     @Override
