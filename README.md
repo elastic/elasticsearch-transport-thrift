@@ -8,7 +8,7 @@ In order to install the plugin, simply run: `bin/plugin -install elasticsearch/e
     ----------------------------------------------
     | Thrift Plugin | Elasticsearch    | Thrift  |
     ----------------------------------------------
-    | master        | 0.19.9 -> master | 0.8.0   |
+    | master        | 0.19.9 -> master | 0.9.0   |
     ----------------------------------------------
     | 1.3.0         | 0.19.9 -> master | 0.8.0   |
     ----------------------------------------------
