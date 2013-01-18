@@ -4,6 +4,7 @@ namespace cpp  elasticsearch.thrift
 namespace rb ElasticSearch.Thrift
 namespace py elasticsearch
 namespace perl Elasticsearch
+namespace php Elasticsearch
 
 enum Method {
     GET = 0,
