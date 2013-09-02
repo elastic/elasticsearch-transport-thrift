@@ -22,7 +22,10 @@ package org.elasticsearch.thrift;
 import org.apache.thrift.TException;
 import org.elasticsearch.common.component.AbstractComponent;
 import org.elasticsearch.common.inject.Inject;
+import org.elasticsearch.common.netty.buffer.ChannelBuffer;
+import org.elasticsearch.common.netty.buffer.ChannelBuffers;
 import org.elasticsearch.common.settings.Settings;
+import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.rest.RestChannel;
 import org.elasticsearch.rest.RestController;
 import org.elasticsearch.rest.RestResponse;
@@ -77,10 +80,25 @@ public class ThriftRestImpl extends AbstractComponent implements Rest.Iface {
             if (response.contentThreadSafe()) {
                 tResponse.setBody(ByteBuffer.wrap(response.content(), 0, response.contentLength()));
             } else {
-                // argh!, we need to copy it over since we are not on the same thread...
-                byte[] body = new byte[response.contentLength()];
-                System.arraycopy(response.content(), 0, body, 0, response.contentLength());
-                tResponse.setBody(ByteBuffer.wrap(body));
+                // Convert the response content to a ChannelBuffer.
+                ChannelBuffer buf;
+
+                if (response instanceof org.elasticsearch.rest.XContentRestResponse) {
+                    XContentBuilder builder = ((org.elasticsearch.rest.XContentRestResponse) response).builder();
+                    if (response.contentThreadSafe()) {
+                        buf = builder.bytes().toChannelBuffer();
+                    } else {
+                        buf = builder.bytes().copyBytesArray().toChannelBuffer();
+                    }
+                } else {
+                    if (response.contentThreadSafe()) {
+                        buf = ChannelBuffers.wrappedBuffer(response.content(), response.contentOffset(), response.contentLength());
+                    } else {
+                        buf = ChannelBuffers.copiedBuffer(response.content(), response.contentOffset(), response.contentLength());
+                    }
+                }
+
+                tResponse.setBody(buf.toByteBuffer());
             }
         }
         return tResponse;
