@@ -5,23 +5,60 @@ The thrift transport plugin allows to use the REST interface over [thrift|http:/
 
 In order to install the plugin, simply run: `bin/plugin -install elasticsearch/elasticsearch-transport-thrift/1.5.0`.
 
-    ----------------------------------------------
-    | Thrift Plugin | Elasticsearch    | Thrift  |
-    ----------------------------------------------
-    | master        | 0.90   -> master | 0.9.1   |
-    ----------------------------------------------
-    | 1.5.0         | 0.90   -> master | 0.9.0   |
-    ----------------------------------------------
-    | 1.4.0         | 0.19.9 -> master | 0.9.0   |
-    ----------------------------------------------
-    | 1.3.0         | 0.19.9 -> master | 0.8.0   |
-    ----------------------------------------------
-    | 1.2.0         | 0.19.0 -> 0.19.8 | 0.8.0   |
-    ----------------------------------------------
-    | 1.1.0         | 0.19 -> master   | 0.6.1   |
-    ----------------------------------------------
-    | 1.0.0         | 0.18             | 0.6.1   |
-    ----------------------------------------------
+<table>
+	<thead>
+		<tr>
+			<td>Thrift Plugin</td>
+			<td>ElasticSearch</td>
+			<td>Thrift</td>
+			<td>Release date</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>1.6.0-SNASPHOT (master)</td>
+			<td>0.90 -> master</td>
+			<td>0.9.1</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>1.5.0</td>
+			<td>0.90 -> master</td>
+			<td>0.9.0</td>
+			<td>26/02/2013</td>
+		</tr>
+		<tr>
+			<td>1.4.0</td>
+			<td>0.19.9 -> 0.20</td>
+			<td>0.9.0</td>
+			<td>16/10/2012</td>
+		</tr>
+		<tr>
+			<td>1.3.0</td>
+			<td>0.19.9 -> 0.20</td>
+			<td>0.8.0</td>
+			<td>23/08/2012</td>
+		</tr>
+		<tr>
+			<td>1.2.0</td>
+			<td>0.19.0 -> 0.19.8</td>
+			<td>0.8.0</td>
+			<td>24/04/2012</td>
+		</tr>
+		<tr>
+			<td>1.1.0</td>
+			<td>0.19.0 -> 0.19.8</td>
+			<td>0.6.1</td>
+			<td>07/02/2012</td>
+		</tr>
+        <tr>
+			<td>1.0.0</td>
+			<td>0.18</td>
+			<td>0.6.1</td>
+			<td>05/12/2011</td>
+		</tr>
+	</tbody>
+</table>
 
 The thrift definition can be found under the `elasticsearch.thrift` file.
 
@@ -35,7 +72,7 @@ License
 
     This software is licensed under the Apache 2 license, quoted below.
 
-    Copyright 2009-2012 Shay Banon and ElasticSearch <http://www.elasticsearch.org>
+    Copyright 2009-2013 Shay Banon and ElasticSearch <http://www.elasticsearch.org>
 
     Licensed under the Apache License, Version 2.0 (the "License"); you may not
     use this file except in compliance with the License. You may obtain a copy of
