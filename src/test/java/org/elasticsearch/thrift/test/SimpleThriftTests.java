@@ -29,9 +29,9 @@ import org.elasticsearch.common.xcontent.XContentFactory;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.node.Node;
 import org.elasticsearch.thrift.*;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -53,7 +53,7 @@ public class SimpleThriftTests {
 
     private Rest.Client client;
 
-    @BeforeMethod
+    @Before
     public void setup() throws IOException, TTransportException {
         node = nodeBuilder().settings(settingsBuilder()
                 .put("path.data", "target/data")
@@ -65,7 +65,7 @@ public class SimpleThriftTests {
         transport.open();
     }
 
-    @AfterMethod
+    @After
     public void tearDown() {
         transport.close();
         node.close();
