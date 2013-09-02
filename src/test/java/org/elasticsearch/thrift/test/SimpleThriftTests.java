@@ -40,7 +40,7 @@ import java.util.Map;
 import static org.elasticsearch.common.settings.ImmutableSettings.settingsBuilder;
 import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.*;
 
 /**
  * @author kimchy (shay.banon)
@@ -73,7 +73,7 @@ public class SimpleThriftTests {
 
     @Test
     public void testSimpleApis() throws Exception {
-        RestRequest request = new RestRequest(Method.POST, "/test/type1");
+        RestRequest request = new RestRequest(Method.POST, "/test/type1/1");
         request.setBody(ByteBuffer.wrap(XContentFactory.jsonBuilder().startObject()
                 .field("field", "value")
                 .endObject().bytes().copyBytesArray().array()));
@@ -83,6 +83,18 @@ public class SimpleThriftTests {
         assertThat(map.get("ok").toString(), equalTo("true"));
         assertThat(map.get("_index").toString(), equalTo("test"));
         assertThat(map.get("_type").toString(), equalTo("type1"));
+        assertThat(map.get("_id").toString(), equalTo("1"));
+
+        request = new RestRequest(Method.GET, "/test/type1/1");
+        response = client.execute(request);
+        map = parseBody(response);
+        assertThat(response.getStatus(), equalTo(Status.OK));
+        assertThat(map.get("_index").toString(), equalTo("test"));
+        assertThat(map.get("_type").toString(), equalTo("type1"));
+        assertThat(map.get("_id").toString(), equalTo("1"));
+        assertThat(map.get("_source"), notNullValue());
+        assertThat(map.get("_source"), instanceOf(Map.class));
+        assertThat(((Map<String, String>)map.get("_source")).get("field"), is("value"));
 
         request = new RestRequest(Method.GET, "/_cluster/health");
         response = client.execute(request);

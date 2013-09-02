@@ -17,13 +17,13 @@ In order to install the plugin, simply run: `bin/plugin -install elasticsearch/e
 	<tbody>
 		<tr>
 			<td>1.6.0-SNASPHOT (master)</td>
-			<td>0.90 -> master</td>
+			<td>0.90.3 -> master</td>
 			<td>0.9.1</td>
 			<td></td>
 		</tr>
 		<tr>
 			<td>1.5.0</td>
-			<td>0.90 -> master</td>
+			<td>0.90 -> 0.90.2</td>
 			<td>0.9.0</td>
 			<td>26/02/2013</td>
 		</tr>

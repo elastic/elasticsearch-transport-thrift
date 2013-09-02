@@ -22,11 +22,11 @@ package org.elasticsearch.thrift;
 import org.apache.thrift.TException;
 import org.elasticsearch.common.component.AbstractComponent;
 import org.elasticsearch.common.inject.Inject;
-import org.elasticsearch.common.io.stream.CachedStreamOutput;
 import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.xcontent.XContentBuilder;
-import org.elasticsearch.rest.*;
+import org.elasticsearch.rest.RestChannel;
+import org.elasticsearch.rest.RestController;
 import org.elasticsearch.rest.RestResponse;
+import org.elasticsearch.rest.RestStatus;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -81,12 +81,6 @@ public class ThriftRestImpl extends AbstractComponent implements Rest.Iface {
                 byte[] body = new byte[response.contentLength()];
                 System.arraycopy(response.content(), 0, body, 0, response.contentLength());
                 tResponse.setBody(ByteBuffer.wrap(body));
-                if (response instanceof XContentRestResponse) {
-                    XContentBuilder builder = ((XContentRestResponse) response).builder();
-                    if (builder.payload() instanceof CachedStreamOutput.Entry) {
-                        CachedStreamOutput.pushEntry((CachedStreamOutput.Entry) builder.payload());
-                    }
-                }
             }
         }
         return tResponse;
