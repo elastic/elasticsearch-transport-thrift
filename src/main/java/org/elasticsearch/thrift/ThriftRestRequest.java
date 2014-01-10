@@ -22,7 +22,7 @@ package org.elasticsearch.thrift;
 import org.elasticsearch.common.bytes.ByteBufferBytesReference;
 import org.elasticsearch.common.bytes.BytesArray;
 import org.elasticsearch.common.bytes.BytesReference;
-import org.elasticsearch.rest.support.AbstractRestRequest;
+import org.elasticsearch.common.collect.ImmutableList;
 import org.elasticsearch.rest.support.RestUtils;
 
 import java.util.HashMap;
@@ -30,7 +30,7 @@ import java.util.Map;
 
 /**
  */
-public class ThriftRestRequest extends AbstractRestRequest implements org.elasticsearch.rest.RestRequest {
+public class ThriftRestRequest extends org.elasticsearch.rest.RestRequest {
 
     private final org.elasticsearch.thrift.RestRequest request;
 
@@ -104,6 +104,15 @@ public class ThriftRestRequest extends AbstractRestRequest implements org.elasti
             return null;
         }
         return request.getHeaders().get(name);
+    }
+
+    @Override
+    public Iterable<Map.Entry<String, String>> headers() {
+        if (request.getHeaders() == null) {
+            return null;
+        }
+
+        return ImmutableList.copyOf(request.getHeaders().entrySet());
     }
 
     @Override
