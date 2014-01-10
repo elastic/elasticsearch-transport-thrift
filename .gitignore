@@ -5,3 +5,5 @@
 /.project
 /.classpath
 /.settings
+data
+.local-execution-hints.log

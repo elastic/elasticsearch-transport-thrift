@@ -24,10 +24,9 @@ import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
-import org.elasticsearch.common.network.NetworkUtils;
 import org.elasticsearch.common.xcontent.XContentFactory;
 import org.elasticsearch.common.xcontent.XContentType;
-import org.elasticsearch.node.Node;
+import org.elasticsearch.test.ElasticsearchIntegrationTest;
 import org.elasticsearch.thrift.*;
 import org.junit.After;
 import org.junit.Before;
@@ -37,28 +36,19 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Map;
 
-import static org.elasticsearch.common.settings.ImmutableSettings.settingsBuilder;
-import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 /**
  * @author kimchy (shay.banon)
  */
-public class SimpleThriftTests {
-
-    private Node node;
+public class SimpleThriftTests extends ElasticsearchIntegrationTest {
 
     private TTransport transport;
 
     private Rest.Client client;
 
     @Before
-    public void setup() throws IOException, TTransportException {
-        node = nodeBuilder().settings(settingsBuilder()
-                .put("path.data", "target/data")
-                .put("cluster.name", "test-cluster-" + NetworkUtils.getLocalAddress())
-                .put("gateway.type", "none")).node();
+    public void beforeTest() throws IOException, TTransportException {
         transport = new TSocket("localhost", 9500);
         TProtocol protocol = new TBinaryProtocol(transport);
         client = new Rest.Client(protocol);
@@ -66,9 +56,8 @@ public class SimpleThriftTests {
     }
 
     @After
-    public void tearDown() {
-        transport.close();
-        node.close();
+    public void afterTest() {
+        if (transport != null) transport.close();
     }
 
     @Test
