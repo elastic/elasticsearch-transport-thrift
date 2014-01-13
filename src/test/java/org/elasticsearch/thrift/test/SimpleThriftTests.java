@@ -41,6 +41,7 @@ import static org.hamcrest.Matchers.*;
 /**
  * @author kimchy (shay.banon)
  */
+@ElasticsearchIntegrationTest.ClusterScope(transportClientRatio = 0.0, numNodes = 1, scope = ElasticsearchIntegrationTest.Scope.TEST)
 public class SimpleThriftTests extends ElasticsearchIntegrationTest {
 
     private TTransport transport;
