@@ -3,11 +3,12 @@ Thrift Transport for ElasticSearch
 
 The thrift transport plugin allows to use the REST interface over [thrift](http://thrift.apache.org/) on top of HTTP.
 
-In order to install the plugin, simply run: `bin/plugin -install elasticsearch/elasticsearch-transport-thrift/1.7.0`.
+In order to install the plugin, simply run: `bin/plugin -install elasticsearch/elasticsearch-transport-thrift/2.0.0.RC1`.
 
 |   Thrift Transport Plugin   | elasticsearch         | Thrift | Release date |
 |-----------------------------|-----------------------|--------|:------------:|
-| 2.0.0.RC1-SNAPSHOT (master) | 1.0.0.RC1 -> master   | 0.9.1  |              |
+| 2.0.0-SNAPSHOT (master)     | 1.0.0.RC1 -> master   | 0.9.1  |              |
+| 2.0.0.RC1                   | 1.0.0.RC1 -> master   | 0.9.1  |  014-10-15   |
 | 1.8.0-SNAPSHOT (1.x)        | 0.90.10 -> 0.90       | 0.9.1  |              |
 | 1.7.0                       | 0.90.10 -> 0.90       | 0.9.1  |  2014-01-13  |
 | 1.6.0                       | 0.90.3 -> 0.90.9      | 0.9.1  |  2013-09-02  |
