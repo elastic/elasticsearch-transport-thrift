@@ -24,6 +24,7 @@ import org.elasticsearch.common.component.AbstractComponent;
 import org.elasticsearch.common.inject.Inject;
 import org.elasticsearch.common.netty.buffer.ChannelBuffer;
 import org.elasticsearch.common.netty.buffer.ChannelBuffers;
+import org.elasticsearch.common.netty.handler.codec.http.HttpHeaders;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.rest.RestChannel;
@@ -100,6 +101,7 @@ public class ThriftRestImpl extends AbstractComponent implements Rest.Iface {
 
                 tResponse.setBody(buf.toByteBuffer());
             }
+            tResponse.putToHeaders(HttpHeaders.Names.CONTENT_TYPE, response.contentType());
         }
         return tResponse;
     }
