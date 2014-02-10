@@ -99,8 +99,8 @@ public class ThriftRestImpl extends AbstractComponent implements Rest.Iface {
                     }
                 }
                 tResponse.setBody(buf.toByteBuffer());
-                tResponse.getHeaders().put(HttpHeaders.Names.CONTENT_TYPE, response.contentType());
             }
+            tResponse.putToHeaders(HttpHeaders.Names.CONTENT_TYPE, response.contentType());
         }
         return tResponse;
     }
