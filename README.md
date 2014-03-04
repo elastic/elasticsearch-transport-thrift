@@ -5,21 +5,15 @@ The thrift transport plugin allows to use the REST interface over [thrift](http:
 
 In order to install the plugin, simply run: `bin/plugin -install elasticsearch/elasticsearch-transport-thrift/2.0.0.RC2`.
 
+* For 1.0.x elasticsearch versions, look at [master branch](https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/master).
+* For 0.90.x elasticsearch versions, look at [1.x branch](https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/1.x).
+
+
 |   Thrift Transport Plugin   | elasticsearch         | Thrift | Release date |
 |-----------------------------|-----------------------|--------|:------------:|
-| 2.0.0-SNAPSHOT (master)     | 1.0.0.RC1 -> master   | 0.9.1  |              |
+| 2.0.0-SNAPSHOT              | 1.0.0.RC1 -> master   | 0.9.1  |  XXXX-XX-XX  |
 | 2.0.0.RC2                   | 1.0.0.RC1 -> master   | 0.9.1  |  2014-02-11  |
 | 2.0.0.RC1                   | 1.0.0.RC1 -> master   | 0.9.1  |  2014-01-15  |
-| 1.9.0-SNAPSHOT (1.x)        | 0.90.10 -> 0.90       | 0.9.1  |              |
-| 1.8.0                       | 0.90.10 -> 0.90       | 0.9.1  |  2014-02-11  |
-| 1.7.0                       | 0.90.10 -> 0.90       | 0.9.1  |  2014-01-13  |
-| 1.6.0                       | 0.90.3 -> 0.90.9      | 0.9.1  |  2013-09-02  |
-| 1.5.0                       | 0.90.0 -> 0.90.2      | 0.9.0  |  2013-02-26  |
-| 1.4.0                       | 0.19.9 -> 0.20        | 0.9.0  |  2012-10-16  |
-| 1.3.0                       | 0.19.9 -> 0.20        | 0.8.0  |  2012-08-23  |
-| 1.2.0                       | 0.19.0 -> 0.19.8      | 0.8.0  |  2012-04-24  |
-| 1.1.0                       | 0.19.0 -> 0.19.8      | 0.6.1  |  2012-02-07  |
-| 1.0.0                       | 0.18                  | 0.6.1  |  2011-12-05  |
 
 The thrift definition can be found under the `elasticsearch.thrift` file.
 
