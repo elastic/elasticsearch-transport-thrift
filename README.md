@@ -11,6 +11,7 @@ In order to install the plugin, simply run: `bin/plugin -install elasticsearch/e
 
 |   Thrift Transport Plugin   | elasticsearch         | Thrift | Release date |
 |-----------------------------|-----------------------|--------|:------------:|
+| 2.1.0-SNAPSHOT              | 1.0.0.RC1 -> master   | 0.9.1  |  XXXX-XX-XX  |
 | 2.0.0                       | 1.0.0.RC1 -> master   | 0.9.1  |  2014-03-04  |
 | 2.0.0.RC2                   | 1.0.0.RC1 -> master   | 0.9.1  |  2014-02-11  |
 | 2.0.0.RC1                   | 1.0.0.RC1 -> master   | 0.9.1  |  2014-01-15  |
