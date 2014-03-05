@@ -26,6 +26,7 @@ import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
 import org.elasticsearch.common.base.Predicate;
+import org.elasticsearch.common.settings.ImmutableSettings;
 import org.elasticsearch.common.util.concurrent.EsExecutors;
 import org.elasticsearch.node.NodeBuilder;
 import org.elasticsearch.thrift.*;
@@ -54,7 +55,10 @@ public class WhileStartingNodeTests {
         nodeThread = EsExecutors.daemonThreadFactory("node").newThread(new Runnable() {
             @Override
             public void run() {
-                NodeBuilder.nodeBuilder().node();
+                NodeBuilder.nodeBuilder().settings(ImmutableSettings.builder()
+                        .put("thrift.port", SimpleThriftTests.getPort(0))
+                        .build()
+                ).node();
 
                 while (!stopped) {
                     try {
@@ -68,7 +72,7 @@ public class WhileStartingNodeTests {
 
         nodeThread.start();
 
-        transport = new TSocket("localhost", 9500);
+        transport = new TSocket("localhost", SimpleThriftTests.getPort(0));
         TProtocol protocol = new TBinaryProtocol(transport);
         client = new Rest.Client(protocol);
     }

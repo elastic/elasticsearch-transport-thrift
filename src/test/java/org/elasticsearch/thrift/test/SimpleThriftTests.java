@@ -24,6 +24,8 @@ import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
+import org.elasticsearch.common.settings.ImmutableSettings;
+import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.xcontent.XContentFactory;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.test.ElasticsearchIntegrationTest;
@@ -41,19 +43,38 @@ import static org.hamcrest.Matchers.*;
 /**
  * @author kimchy (shay.banon)
  */
-@ElasticsearchIntegrationTest.ClusterScope(transportClientRatio = 0.0, numNodes = 1, scope = ElasticsearchIntegrationTest.Scope.TEST)
+
+@ElasticsearchIntegrationTest.ClusterScope(transportClientRatio = 0.0, scope = ElasticsearchIntegrationTest.Scope.SUITE)
 public class SimpleThriftTests extends ElasticsearchIntegrationTest {
 
     private TTransport transport;
-
     private Rest.Client client;
+
+    public static int getPort(int nodeOrdinal) {
+        try {
+            return PropertiesHelper.getAsInt("plugin.port")
+                    + nodeOrdinal * 10;
+        } catch (IOException e) {
+        }
+
+        return -1;
+    }
 
     @Before
     public void beforeTest() throws IOException, TTransportException {
-        transport = new TSocket("localhost", 9500);
+        int port = getPort(randomInt(cluster().size()-1));
+        logger.info("  --> Testing Thrift on port [{}]", port);
+        transport = new TSocket("localhost", port);
         TProtocol protocol = new TBinaryProtocol(transport);
         client = new Rest.Client(protocol);
         transport.open();
+    }
+
+    @Override
+    protected Settings nodeSettings(int nodeOrdinal) {
+        return ImmutableSettings.builder()
+                .put("thrift.port", getPort(nodeOrdinal))
+                .build();
     }
 
     @After
