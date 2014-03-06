@@ -28,6 +28,7 @@ import org.apache.thrift.transport.TTransportException;
 import org.elasticsearch.common.base.Predicate;
 import org.elasticsearch.common.settings.ImmutableSettings;
 import org.elasticsearch.common.util.concurrent.EsExecutors;
+import org.elasticsearch.node.Node;
 import org.elasticsearch.node.NodeBuilder;
 import org.elasticsearch.thrift.*;
 import org.junit.After;
@@ -55,7 +56,7 @@ public class WhileStartingNodeTests {
         nodeThread = EsExecutors.daemonThreadFactory("node").newThread(new Runnable() {
             @Override
             public void run() {
-                NodeBuilder.nodeBuilder().settings(ImmutableSettings.builder()
+                Node node = NodeBuilder.nodeBuilder().settings(ImmutableSettings.builder()
                         .put("thrift.port", SimpleThriftTests.getPort(0))
                         .build()
                 ).node();
@@ -64,9 +65,13 @@ public class WhileStartingNodeTests {
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        if (node != null) {
+                            node.stop();
+                        }
                     }
                 }
+
+                node.stop();
             }
         });
 
