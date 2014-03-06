@@ -81,6 +81,17 @@ public class WhileStartingNodeTests {
     public void afterTest() {
         if (transport != null) transport.close();
         if (nodeThread != null) stopped = true;
+
+        // We wait until nodeThread is stopped
+        try {
+            assertThat(awaitBusy(new Predicate<Object>() {
+                public boolean apply(Object obj) {
+                    return !nodeThread.isAlive();
+                }
+            }, 5, TimeUnit.SECONDS), equalTo(true));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
