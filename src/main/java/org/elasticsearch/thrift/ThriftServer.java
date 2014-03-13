@@ -136,7 +136,7 @@ public class ThriftServer extends AbstractLifecycleComponent<ThriftServer> {
         }
         logger.info("bound on port [{}]", portNumber);
         try {
-            nodeService.putNodeAttribute("thrift_address", new InetSocketAddress(networkService.resolvePublishHostAddress(publishHost), portNumber).toString());
+            nodeService.putAttribute("thrift_address", new InetSocketAddress(networkService.resolvePublishHostAddress(publishHost), portNumber).toString());
         } catch (Exception e) {
             // ignore
         }
@@ -151,7 +151,7 @@ public class ThriftServer extends AbstractLifecycleComponent<ThriftServer> {
 
     @Override
     protected void doStop() throws ElasticSearchException {
-        nodeService.removeNodeAttribute("thrift_address");
+        nodeService.removeAttribute("thrift_address");
         server.stop();
     }
 
