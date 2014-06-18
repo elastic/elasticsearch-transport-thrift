@@ -56,148 +56,17 @@ public class ThriftRestImpl extends AbstractComponent implements Rest.Iface {
         }
         final CountDownLatch latch = new CountDownLatch(1);
         final AtomicReference<org.elasticsearch.thrift.RestResponse> ref = new AtomicReference<org.elasticsearch.thrift.RestResponse>();
-        restController.dispatchRequest(new ThriftRestRequest(request), new RestChannel() {
-            @Override
-            public void sendResponse(RestResponse response) {
-                try {
-                    ref.set(convert(response));
-                } catch (IOException e) {
-                    // ignore, should not happen...
-                }
-                latch.countDown();
-            }
-        });
+        
+        ThriftRestRequest thriftRestRequest = new ThriftRestRequest(request);
+        ThriftRestChannel thriftRestChannel = new ThriftRestChannel(thriftRestRequest, latch, ref);;
+        
+        restController.dispatchRequest(thriftRestRequest, thriftRestChannel);
+        
         try {
             latch.await();
             return ref.get();
         } catch (Exception e) {
             throw new TException("failed to generate response", e);
-        }
-    }
-
-    private org.elasticsearch.thrift.RestResponse convert(RestResponse response) throws IOException {
-        org.elasticsearch.thrift.RestResponse tResponse = new org.elasticsearch.thrift.RestResponse(getStatus(response.status()));
-        if (response.contentLength() > 0) {
-            if (response.contentThreadSafe()) {
-                tResponse.setBody(ByteBuffer.wrap(response.content(), 0, response.contentLength()));
-            } else {
-                // Convert the response content to a ChannelBuffer.
-                ChannelBuffer buf;
-
-                if (response instanceof org.elasticsearch.rest.XContentRestResponse) {
-                    XContentBuilder builder = ((org.elasticsearch.rest.XContentRestResponse) response).builder();
-                    if (response.contentThreadSafe()) {
-                        buf = builder.bytes().toChannelBuffer();
-                    } else {
-                        buf = builder.bytes().copyBytesArray().toChannelBuffer();
-                    }
-                } else {
-                    if (response.contentThreadSafe()) {
-                        buf = ChannelBuffers.wrappedBuffer(response.content(), response.contentOffset(), response.contentLength());
-                    } else {
-                        buf = ChannelBuffers.copiedBuffer(response.content(), response.contentOffset(), response.contentLength());
-                    }
-                }
-                tResponse.setBody(buf.toByteBuffer());
-            }
-            tResponse.putToHeaders(HttpHeaders.Names.CONTENT_TYPE, response.contentType());
-        }
-        return tResponse;
-    }
-
-    private Status getStatus(RestStatus status) {
-        switch (status) {
-            case CONTINUE:
-                return Status.CONT;
-            case SWITCHING_PROTOCOLS:
-                return Status.SWITCHING_PROTOCOLS;
-            case OK:
-                return Status.OK;
-            case CREATED:
-                return Status.CREATED;
-            case ACCEPTED:
-                return Status.ACCEPTED;
-            case NON_AUTHORITATIVE_INFORMATION:
-                return Status.NON_AUTHORITATIVE_INFORMATION;
-            case NO_CONTENT:
-                return Status.NO_CONTENT;
-            case RESET_CONTENT:
-                return Status.RESET_CONTENT;
-            case PARTIAL_CONTENT:
-                return Status.PARTIAL_CONTENT;
-            case MULTI_STATUS:
-                // no status for this??
-                return Status.INTERNAL_SERVER_ERROR;
-            case MULTIPLE_CHOICES:
-                return Status.MULTIPLE_CHOICES;
-            case MOVED_PERMANENTLY:
-                return Status.MOVED_PERMANENTLY;
-            case FOUND:
-                return Status.FOUND;
-            case SEE_OTHER:
-                return Status.SEE_OTHER;
-            case NOT_MODIFIED:
-                return Status.NOT_MODIFIED;
-            case USE_PROXY:
-                return Status.USE_PROXY;
-            case TEMPORARY_REDIRECT:
-                return Status.TEMPORARY_REDIRECT;
-            case BAD_REQUEST:
-                return Status.BAD_REQUEST;
-            case UNAUTHORIZED:
-                return Status.UNAUTHORIZED;
-            case PAYMENT_REQUIRED:
-                return Status.PAYMENT_REQUIRED;
-            case FORBIDDEN:
-                return Status.FORBIDDEN;
-            case NOT_FOUND:
-                return Status.NOT_FOUND;
-            case METHOD_NOT_ALLOWED:
-                return Status.METHOD_NOT_ALLOWED;
-            case NOT_ACCEPTABLE:
-                return Status.NOT_ACCEPTABLE;
-            case PROXY_AUTHENTICATION:
-                return Status.INTERNAL_SERVER_ERROR;
-            case REQUEST_TIMEOUT:
-                return Status.REQUEST_TIMEOUT;
-            case CONFLICT:
-                return Status.CONFLICT;
-            case GONE:
-                return Status.GONE;
-            case LENGTH_REQUIRED:
-                return Status.LENGTH_REQUIRED;
-            case PRECONDITION_FAILED:
-                return Status.PRECONDITION_FAILED;
-            case REQUEST_ENTITY_TOO_LARGE:
-                return Status.REQUEST_ENTITY_TOO_LARGE;
-            case REQUEST_URI_TOO_LONG:
-                return Status.REQUEST_URI_TOO_LONG;
-            case UNSUPPORTED_MEDIA_TYPE:
-                return Status.UNSUPPORTED_MEDIA_TYPE;
-            case REQUESTED_RANGE_NOT_SATISFIED:
-                return Status.INTERNAL_SERVER_ERROR;
-            case EXPECTATION_FAILED:
-                return Status.EXPECTATION_FAILED;
-            case UNPROCESSABLE_ENTITY:
-                return Status.BAD_REQUEST;
-            case LOCKED:
-                return Status.BAD_REQUEST;
-            case FAILED_DEPENDENCY:
-                return Status.BAD_REQUEST;
-            case INTERNAL_SERVER_ERROR:
-                return Status.INTERNAL_SERVER_ERROR;
-            case NOT_IMPLEMENTED:
-                return Status.NOT_IMPLEMENTED;
-            case BAD_GATEWAY:
-                return Status.BAD_GATEWAY;
-            case SERVICE_UNAVAILABLE:
-                return Status.SERVICE_UNAVAILABLE;
-            case GATEWAY_TIMEOUT:
-                return Status.GATEWAY_TIMEOUT;
-            case HTTP_VERSION_NOT_SUPPORTED:
-                return Status.INTERNAL_SERVER_ERROR;
-            default:
-                return Status.INTERNAL_SERVER_ERROR;
         }
     }
 }
