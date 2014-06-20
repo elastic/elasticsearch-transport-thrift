@@ -25,6 +25,9 @@ The thrift [schema](https://github.com/elasticsearch/elasticsearch-transport-thr
 
 * `thrift.port`: The port to bind to. Defaults to `9500-9600`.
 * `thrift.frame`: Defaults to `-1`, which means no framing. Set to a higher value to specify the frame size (like `15mb`).
+* `thrift.bind_host`: Set explicit bindings for thrift protocol. Defaults to `transport.bind_host` or `transport.host`.
+* `thrift.publish_host`: Set explicit bindings for thrift protocol. Defaults to `transport.publish_host` or `transport.host`.
+* `thrift.protocol`: `binary` (default) which use Binary protocol or `compact` which uses Compact Protocol. See [Thrift documentation](https://thrift.apache.org/docs/concepts).
 
 License
 -------
