@@ -30,6 +30,7 @@ import org.elasticsearch.common.settings.ImmutableSettings;
 import org.elasticsearch.common.util.concurrent.EsExecutors;
 import org.elasticsearch.node.Node;
 import org.elasticsearch.node.NodeBuilder;
+import org.elasticsearch.plugins.PluginsService;
 import org.elasticsearch.thrift.*;
 import org.junit.After;
 import org.junit.Before;
@@ -58,6 +59,7 @@ public class WhileStartingNodeTests {
             public void run() {
                 Node node = NodeBuilder.nodeBuilder().settings(ImmutableSettings.builder()
                         .put("thrift.port", SimpleThriftTests.getPort(0))
+                        .put("plugins." + PluginsService.LOAD_PLUGIN_FROM_CLASSPATH, true)
                         .build()
                 ).node();
 
