@@ -6,6 +6,7 @@ The thrift transport plugin allows to use the REST interface over [thrift](http:
 In order to install the plugin, simply run: `bin/plugin -install elasticsearch/elasticsearch-transport-thrift/2.0.0`.
 
 * For master elasticsearch versions, look at [master branch](https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/master).
+* For 1.3.x elasticsearch versions, look at [es-1.3 branch](https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/es-1.3).
 * For 1.2.x elasticsearch versions, look at [es-1.2 branch](https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/es-1.2).
 * For 1.1.x elasticsearch versions, look at [es-1.1 branch](https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/es-1.1).
 * For 1.0.x elasticsearch versions, look at [es-1.0 branch](https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/es-1.0).
@@ -13,11 +14,11 @@ In order to install the plugin, simply run: `bin/plugin -install elasticsearch/e
 
 |   Thrift Transport Plugin   | elasticsearch         | Thrift | Release date |
 |-----------------------------|-----------------------|--------|:------------:|
-| 2.2.0-SNAPSHOT              | 1.2.0 -> 1.2          | 0.9.1  |  XXXX-XX-XX  |
+| 2.3.0-SNAPSHOT              | 1.3.0 -> 1.3          | 0.9.1  |  XXXX-XX-XX  |
 
 Please read documentation relative to the version you are using:
 
-* [2.2.0-SNAPSHOT](https://github.com/elasticsearch/elasticsearch-transport-thrift/blob/es-1.2/README.md)
+* [2.3.0-SNAPSHOT](https://github.com/elasticsearch/elasticsearch-transport-thrift/blob/es-1.3/README.md)
 
 The thrift definition can be found under the `elasticsearch.thrift` file.
 
