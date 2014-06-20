@@ -13,10 +13,12 @@ In order to install the plugin, simply run: `bin/plugin -install elasticsearch/e
 
 |   Thrift Transport Plugin   | elasticsearch         | Thrift | Release date |
 |-----------------------------|-----------------------|--------|:------------:|
+| 2.2.1-SNAPSHOT              | 1.2.0 -> 1.2          | 0.9.1  |  XXXX-XX-XX  |
 | 2.2.0                       | 1.2.0 -> 1.2          | 0.9.1  |  2014-06-20  |
 
 Please read documentation relative to the version you are using:
 
+* [2.2.1-SNAPSHOT](https://github.com/elasticsearch/elasticsearch-transport-thrift/blob/es-1.2/README.md)
 * [2.2.0](https://github.com/elasticsearch/elasticsearch-transport-thrift/blob/v2.2.0/README.md)
 
 The thrift definition can be found under the `elasticsearch.thrift` file.
