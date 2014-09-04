@@ -3,23 +3,32 @@ Thrift Transport for Elasticsearch
 
 The thrift transport plugin allows to use the REST interface over [thrift](http://thrift.apache.org/) on top of HTTP.
 
-In order to install the plugin, simply run: `bin/plugin -install elasticsearch/elasticsearch-transport-thrift/2.0.0`.
+In order to install the plugin, simply run: 
 
-* For master elasticsearch versions, look at [master branch](https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/master).
-* For 1.x.x elasticsearch versions, look at [es-1.x branch](https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/es-1.x).
-* For 1.3.x elasticsearch versions, look at [es-1.3 branch](https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/es-1.3).
-* For 1.2.x elasticsearch versions, look at [es-1.2 branch](https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/es-1.2).
-* For 1.1.x elasticsearch versions, look at [es-1.1 branch](https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/es-1.1).
-* For 1.0.x elasticsearch versions, look at [es-1.0 branch](https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/es-1.0).
-* For 0.90.x elasticsearch versions, look at [es-0.90 branch](https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/es-0.90).
+```sh
+bin/plugin -install elasticsearch/elasticsearch-transport-thrift/2.3.0
+```
 
-|   Thrift Transport Plugin   | elasticsearch         | Thrift | Release date |
-|-----------------------------|-----------------------|--------|:------------:|
-| 3.0.0-SNAPSHOT              | master                | 0.9.1  |  XXXX-XX-XX  |
+You need to install a version matching your Elasticsearch version:
 
-Please read documentation relative to the version you are using:
+| elasticsearch |  ICU Analysis Plugin  |   Docs     |  
+|---------------|-----------------------|------------|
+| master        |  Build from source    | See below  |
+| es-1.x        |  Build from source    | [2.4.0-SNAPSHOT](https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/es-1.x/#version-240-snapshot-for-elasticsearch-1x)  |
+| es-1.3        |  2.3.0                | [2.3.0](https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v2.3.0/#thrift-transport-for-elasticsearch)  |
+| es-1.2        |  2.2.0                | [2.2.0](https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v2.2.0/#thrift-transport-for-elasticsearch)  |
+| es-1.0        |  2.0.0                | [2.0.0](https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v2.0.0/#thrift-transport-for-elasticsearch)  |
+| es-0.90       |  1.8.0                | [1.8.0](https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v1.8.0/#thrift-transport-for-elasticsearch)  |
 
-* [3.0.0-SNAPSHOT](https://github.com/elasticsearch/elasticsearch-transport-thrift/blob/master/README.md)
+To build a `SNAPSHOT` version, you need to build it with Maven:
+
+```bash
+mvn clean install
+plugin --install transport-thrift \
+       --url file:target/releases/elasticsearch-transport-thrift-X.X.X-SNAPSHOT.zip
+```
+
+## Guide
 
 The thrift definition can be found under the `elasticsearch.thrift` file.
 
