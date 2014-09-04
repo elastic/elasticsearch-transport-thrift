@@ -19,7 +19,6 @@
 
 package org.elasticsearch.thrift;
 
-import org.elasticsearch.common.bytes.ByteBufferBytesReference;
 import org.elasticsearch.common.bytes.BytesArray;
 import org.elasticsearch.common.bytes.BytesReference;
 import org.elasticsearch.common.collect.ImmutableList;
@@ -95,7 +94,7 @@ public class ThriftRestRequest extends org.elasticsearch.rest.RestRequest {
         if (!request.isSetBody()) {
             return BytesArray.EMPTY;
         }
-        return new ByteBufferBytesReference(request.bufferForBody());
+        return new BytesArray(request.getBody());
     }
 
     @Override
