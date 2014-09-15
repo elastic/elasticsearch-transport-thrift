@@ -114,7 +114,7 @@ public class SimpleThriftTests extends ElasticsearchIntegrationTest {
 
         request = new RestRequest(Method.GET, "/bogusindex");
         response = client.execute(request);
-        assertThat(response.getStatus(), equalTo(Status.BAD_REQUEST));
+        assertThat(response.getStatus(), equalTo(Status.NOT_FOUND));
     }
 
     private Map<String, Object> parseBody(RestResponse response) throws IOException {
