@@ -3,7 +3,7 @@ Thrift Transport for Elasticsearch
 
 The thrift transport plugin allows to use the REST interface over [thrift](http://thrift.apache.org/) on top of HTTP.
 
-## Version 2.4.0-SNAPSHOT for Elasticsearch: 1.x
+## Version 2.4.0 for Elasticsearch: 1.4
 
 If you are looking for another version documentation, please refer to the 
 [compatibility matrix](http://github.com/elasticsearch/elasticsearch-transport-thrift#thrift-transport-for-elasticsearch).
