@@ -30,7 +30,10 @@ import org.elasticsearch.common.xcontent.XContentFactory;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.plugins.PluginsService;
 import org.elasticsearch.test.ElasticsearchIntegrationTest;
-import org.elasticsearch.thrift.*;
+import org.elasticsearch.thrift.Method;
+import org.elasticsearch.thrift.RestRequest;
+import org.elasticsearch.thrift.RestResponse;
+import org.elasticsearch.thrift.Status;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -49,7 +52,7 @@ import static org.hamcrest.Matchers.*;
 public class SimpleThriftTests extends ElasticsearchIntegrationTest {
 
     private TTransport transport;
-    private Rest.Client client;
+    private org.elasticsearch.thrift.Rest.Client client;
 
     public static int getPort(int nodeOrdinal) {
         try {
@@ -67,7 +70,7 @@ public class SimpleThriftTests extends ElasticsearchIntegrationTest {
         logger.info("  --> Testing Thrift on port [{}]", port);
         transport = new TSocket("localhost", port);
         TProtocol protocol = new TBinaryProtocol(transport);
-        client = new Rest.Client(protocol);
+        client = new org.elasticsearch.thrift.Rest.Client(protocol);
         transport.open();
     }
 
