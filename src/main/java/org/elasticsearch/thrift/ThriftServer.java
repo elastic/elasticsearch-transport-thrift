@@ -74,12 +74,12 @@ public class ThriftServer extends AbstractLifecycleComponent<ThriftServer> {
         this.client = client;
         this.networkService = networkService;
         this.nodeService = nodeService;
-        this.frame = (int) componentSettings.getAsBytesSize("frame", new ByteSizeValue(-1)).bytes();
-        this.port = componentSettings.get("port", "9500-9600");
-        this.bindHost = componentSettings.get("bind_host", settings.get("transport.bind_host", settings.get("transport.host")));
-        this.publishHost = componentSettings.get("publish_host", settings.get("transport.publish_host", settings.get("transport.host")));
+        this.frame = (int) settings.getAsBytesSize("thrift.frame", new ByteSizeValue(-1)).bytes();
+        this.port = settings.get("thrift.port", "9500-9600");
+        this.bindHost = settings.get("thrift.bind_host", settings.get("transport.bind_host", settings.get("transport.host")));
+        this.publishHost = settings.get("thrift.publish_host", settings.get("transport.publish_host", settings.get("transport.host")));
 
-        if (componentSettings.get("protocol", "binary").equals("compact")) {
+        if (settings.get("thrift.protocol", "binary").equals("compact")) {
             protocolFactory = new TCompactProtocol.Factory();
         } else {
             protocolFactory = new TBinaryProtocol.Factory();

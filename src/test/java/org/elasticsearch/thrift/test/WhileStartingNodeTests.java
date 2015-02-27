@@ -68,12 +68,12 @@ public class WhileStartingNodeTests {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         if (node != null) {
-                            node.stop();
+                            node.close();
                         }
                     }
                 }
 
-                node.stop();
+                node.close();
             }
         });
 
