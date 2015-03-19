@@ -1,7 +1,7 @@
 Thrift Transport for Elasticsearch
 ==================================
 
-** DEPRECATED: The thrift transport is deprecated as of Elasticsearch v1.5.0, and will be removed in 2.0 **
+**DEPRECATED: The thrift transport is deprecated as of Elasticsearch v1.5.0, and will be removed in 2.0**
 
 The thrift transport plugin allows to use the REST interface over [thrift](http://thrift.apache.org/) on top of HTTP.
 
