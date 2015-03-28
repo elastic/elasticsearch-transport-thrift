@@ -16,7 +16,7 @@ public class ThriftRestChannel extends org.elasticsearch.rest.RestChannel {
     private AtomicReference<org.elasticsearch.thrift.RestResponse> ref;
 
 	public ThriftRestChannel(org.elasticsearch.rest.RestRequest request, CountDownLatch latch, AtomicReference<org.elasticsearch.thrift.RestResponse> ref) {
-	    super(request);
+	    super(request, true);
 	    this.latch = latch;
 	    this.ref = ref;
 	}
