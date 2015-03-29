@@ -8,7 +8,7 @@ The thrift transport plugin allows to use the REST interface over [thrift](http:
 In order to install the plugin, simply run: 
 
 ```sh
-bin/plugin -install elasticsearch/elasticsearch-transport-thrift/2.4.1
+bin/plugin install elasticsearch/elasticsearch-transport-thrift/2.5.0
 ```
 
 You need to install a version matching your Elasticsearch version:
@@ -17,7 +17,7 @@ You need to install a version matching your Elasticsearch version:
 |---------------|-----------------------|------------|
 | master        |  Build from source    | See below  |
 | es-1.x        |  Build from source    | [2.6.0-SNAPSHOT](https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/es-1.x/#version-260-snapshot-for-elasticsearch-1x)  |
-| es-1.5        |  Build from source    | [2.5.0-SNAPSHOT](https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/es-1.5/#version-250-snapshot-for-elasticsearch-15)  |
+|    es-1.5              |     2.5.0         | [2.5.0](https://github.com/elastic/elasticsearch-transport-thrift/tree/v2.5.0/#version-250-for-elasticsearch-15)                  |
 |    es-1.4              |     2.4.1         | [2.4.1](https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v2.4.1/#version-241-for-elasticsearch-14)                  |
 | es-1.3        |  2.3.0                | [2.3.0](https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v2.3.0/#thrift-transport-for-elasticsearch)  |
 | es-1.2        |  2.2.0                | [2.2.0](https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v2.2.0/#thrift-transport-for-elasticsearch)  |
