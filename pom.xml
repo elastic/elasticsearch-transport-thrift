@@ -33,6 +33,7 @@
 
     <properties>
         <es.plugin.port>9500</es.plugin.port>
+        <tests.security.manager>true</tests.security.manager>
     </properties>
 
     <dependencies>

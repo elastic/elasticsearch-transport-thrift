@@ -31,6 +31,7 @@ import org.elasticsearch.common.util.concurrent.EsExecutors;
 import org.elasticsearch.node.Node;
 import org.elasticsearch.node.NodeBuilder;
 import org.elasticsearch.plugins.PluginsService;
+import org.elasticsearch.test.ElasticsearchTestCase;
 import org.elasticsearch.thrift.*;
 import org.junit.After;
 import org.junit.Before;
@@ -44,7 +45,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
-public class WhileStartingNodeTests {
+public class WhileStartingNodeTests extends ElasticsearchTestCase {
 
     private TTransport transport;
     private Rest.Client client;
@@ -59,6 +60,7 @@ public class WhileStartingNodeTests {
             public void run() {
                 Node node = NodeBuilder.nodeBuilder().settings(ImmutableSettings.builder()
                         .put("thrift.port", SimpleThriftTests.getPort(0))
+                        .put("path.home", createTempDir())
                         .put("plugins." + PluginsService.LOAD_PLUGIN_FROM_CLASSPATH, true)
                         .build()
                 ).node();
