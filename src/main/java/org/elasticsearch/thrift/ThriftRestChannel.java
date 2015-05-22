@@ -12,16 +12,16 @@ import java.util.concurrent.atomic.AtomicReference;
 /**
  */
 public class ThriftRestChannel extends org.elasticsearch.rest.RestChannel {
-	private CountDownLatch latch;
+    private CountDownLatch latch;
     private AtomicReference<org.elasticsearch.thrift.RestResponse> ref;
 
-	public ThriftRestChannel(org.elasticsearch.rest.RestRequest request, CountDownLatch latch, AtomicReference<org.elasticsearch.thrift.RestResponse> ref) {
-	    super(request, true);
-	    this.latch = latch;
-	    this.ref = ref;
-	}
-	
-	@Override
+    public ThriftRestChannel(org.elasticsearch.rest.RestRequest request, CountDownLatch latch, AtomicReference<org.elasticsearch.thrift.RestResponse> ref) {
+        super(request, true);
+        this.latch = latch;
+        this.ref = ref;
+    }
+
+    @Override
     public void sendResponse(RestResponse response) {
         try {
             ref.set(convert(response));
@@ -30,15 +30,15 @@ public class ThriftRestChannel extends org.elasticsearch.rest.RestChannel {
         }
         latch.countDown();
     }
-	
-	private org.elasticsearch.thrift.RestResponse convert(org.elasticsearch.rest.RestResponse response) throws IOException {
+
+    private org.elasticsearch.thrift.RestResponse convert(org.elasticsearch.rest.RestResponse response) throws IOException {
         org.elasticsearch.thrift.RestResponse tResponse = new org.elasticsearch.thrift.RestResponse(getStatus(response.status()));
         
         int contentLength = response.content().length();
         if (contentLength > 0) {
             // TODO: do we always need a copy?
             // there was an optimization previously, but it did not compile, so it was killed without mercy.
-          	tResponse.setBody(ByteBuffer.wrap(response.content().copyBytesArray().toBytes(), 0, contentLength));
+            tResponse.setBody(ByteBuffer.wrap(response.content().copyBytesArray().toBytes(), 0, contentLength));
             tResponse.putToHeaders(HttpHeaders.Names.CONTENT_TYPE, response.contentType());
         }
         return tResponse;
