@@ -36,11 +36,7 @@ public class ThriftRestChannel extends org.elasticsearch.rest.RestChannel {
         
         int contentLength = response.content().length();
         if (contentLength > 0) {
-            if (response.contentThreadSafe()) {
-            	tResponse.setBody(ByteBuffer.wrap(response.content().toBytes(), 0, contentLength));
-            } else {
-            	tResponse.setBody(ByteBuffer.wrap(response.content().copyBytesArray().toBytes(), 0, contentLength));
-            }
+            tResponse.setBody(ByteBuffer.wrap(response.content().toBytes(), 0, contentLength));
             tResponse.putToHeaders(HttpHeaders.Names.CONTENT_TYPE, response.contentType());
         }
         return tResponse;
