@@ -85,11 +85,6 @@ public class ThriftRestRequest extends org.elasticsearch.rest.RestRequest {
     }
 
     @Override
-    public boolean contentUnsafe() {
-        return false;
-    }
-
-    @Override
     public BytesReference content() {
         if (!request.isSetBody()) {
             return BytesArray.EMPTY;
